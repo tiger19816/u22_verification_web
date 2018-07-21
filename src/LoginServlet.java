@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class LoginServlet
+ * Androidから値の受け取りサンプルサーブレット.
+ *
+ * @author Taiga Hirai
  */
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
