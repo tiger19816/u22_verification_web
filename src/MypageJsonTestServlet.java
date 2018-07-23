@@ -1,29 +1,28 @@
 
 
-
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import b.team.works.u22.hal.u22teamb.tools.DataAccess;
+import entities.Female;
+
 /**
- * Androidから値の受け取りサンプルサーブレット.
- *
- * @author Taiga Hirai
+ * Servlet implementation class MypageJsonTestServlet
  */
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/MypageJsonTestServlet")
+public class MypageJsonTestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public MypageJsonTestServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,25 +35,36 @@ public class LoginServlet extends HttpServlet {
 		//文字化け対策
 		request.setCharacterEncoding("utf-8");
 
-		String id = request.getParameter("id");
-		String password = request.getParameter("password");
+		//妻ID取得
+		//String id = request.getParameter("id");
 
-		if(id.equals("aa") && password.equals("aa")) {
-			request.setAttribute("result", "true");
+		//※※デバック用※※
+		String id = "1";
+
+		//妻エンティティクラスのオブジェクト作成
+		Female f = new Female();
+
+		//DBに接続
+		DataAccess da = null;
+		try {
+			da = new DataAccess();
+
+			//妻情報抽出
+			da.FemaleSelect(id);
+
+			da.close();
 		}
-		else {
-			request.setAttribute("result", "false");
+		catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		catch (Exception e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
 		}
 
-		RequestDispatcher rd = request.getRequestDispatcher("LoginJson.jsp");
-		rd.forward(request, response);
-
-		//JSONを作成する
-		response.setContentType("application/json; charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		out.print("{");
-		out.println("\"result\":true");
-		out.println("}");
+//		RequestDispatcher rd = request.getRequestDispatcher("");
+//		rd.forward(request, response);
 	}
 
 	/**
