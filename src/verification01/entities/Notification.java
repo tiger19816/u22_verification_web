@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 /**
  * 通知内容のエンティティクラス。
+ * （使ってない）
  * 
  * @author Yuki Yoshida
  */

@@ -38,7 +38,9 @@ public class Verification01Servlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		this.createJson();
+		MyMessage msg = new MyMessage("検証1", "これは、通知テストです。");
+		msg.sendToToken("fZqdRJP3Q0s:APA91bHKT-yZFVIGDUemRjZpX8fiwWYeWo-LtZLlmg42P9BTcnLNFSkLfqgiWO9FiCH6v2JeOzVz6rD03k27pY88JmRpBelH_uyuqCIJFW9f4WWPeKcG3oGunwvMj21I0goHAa62F0s-shqWVODLqrHhSlz_NM1KrQ");
+			// Androidから受け取ったトークンを代入。
 	}
 
 }

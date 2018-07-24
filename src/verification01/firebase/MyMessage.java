@@ -10,23 +10,33 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * PUSH通知を送信するクラス。
+ * 
+ * @author Yuki Yoshida
+ */
 public class MyMessage {
 	/**
-	 * ウェブAPIキー。
+	 * サーバーキー。
+	 * Firebaseコンソール → プロジェクトの設定 → クラウドメッセージング → サーバーキー。
 	 */
-	private String SERVER_KEY = "AIzaSyDkUU1BJm_5bWocrxjUjLxUZcTcg_r6nnM";
+	private String SERVER_KEY = "AAAA1hAFF08:APA91bEO_kOwJgxCPOFDP9By4x_ExZ0XjPBHVOcNrdmqtvrW5xj-UiVJ5bS2wGdJg1N3EWOQ2F2XqJkpiZ1sRia28G1F4i7cuJuSqLy8HTvHM7J0WKbCeT-GwrbH3KtDh5Eme283uxdI9LGRzIQlMO93fJSUSYo5Tg";
 	/**
 	 * リクエスト先エンドポイント。
 	 */
 	private final String API_URL_FCM = "https://fcm.googleapis.com/fcm/send";
+	/**
+	 * JSONオブジェクト。
+	 */
 	private JSONObject _object;
 	
 	public MyMessage(String title, String message) throws JSONException {
 	    this._object = new JSONObject();
 	    JSONObject data = new JSONObject();
-	    data.put("title", title);
-	    data.put("message", message);
-	    this._object.put("data", data);
+	    data.put("title", title);	// タイトル。
+	    data.put("text", message);	// 内容。
+	    this._object.put("notification", data);	// 上記２つをnotification内に書き込み。
+	    this._object.put("priority", "high");	// 優先度:高。（アプリを終了しても通知。）
 	}
 	
 	/**
@@ -66,9 +76,9 @@ public class MyMessage {
 	}
 	
 	/**
+	 * 通知を送信するメソッド。
 	 * 
-	 * 
-	 * @param toTopic
+	 * @param toTopic トピック単位での送信か否か。
 	 * @throws JSONException JSON発行時の例外。
 	 * @throws IOException 入出力に関する例外。
 	 */
@@ -85,7 +95,7 @@ public class MyMessage {
         cnct.setRequestProperty("Accept", "application/json");
         cnct.setRequestProperty("Authorization", "key=" + SERVER_KEY);
 
-        System.out.println(this._object.toString());
+//        System.out.println(this._object.toString());
 
         OutputStreamWriter wr = new OutputStreamWriter(cnct.getOutputStream());
         wr.write(this._object.toString());
