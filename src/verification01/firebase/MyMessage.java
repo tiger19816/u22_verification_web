@@ -18,11 +18,12 @@ import org.json.JSONObject;
 public class MyMessage {
 	/**
 	 * サーバーキー。
-	 * Firebaseコンソール → プロジェクトの設定 → クラウドメッセージング → サーバーキー。
+	 * （Firebaseコンソール → プロジェクトの設定 → クラウドメッセージング → サーバーキー。）
 	 */
 	private String SERVER_KEY = "AAAA1hAFF08:APA91bEO_kOwJgxCPOFDP9By4x_ExZ0XjPBHVOcNrdmqtvrW5xj-UiVJ5bS2wGdJg1N3EWOQ2F2XqJkpiZ1sRia28G1F4i7cuJuSqLy8HTvHM7J0WKbCeT-GwrbH3KtDh5Eme283uxdI9LGRzIQlMO93fJSUSYo5Tg";
 	/**
 	 * リクエスト先エンドポイント。
+	 * （変更禁止。）
 	 */
 	private final String API_URL_FCM = "https://fcm.googleapis.com/fcm/send";
 	/**
@@ -30,6 +31,13 @@ public class MyMessage {
 	 */
 	private JSONObject _object;
 	
+	/**
+	 * 通知を生成するコンストラクタ。
+	 * 
+	 * @param title 通知タイトル。
+	 * @param message 通知内容。
+	 * @throws JSONException JSON発行時の例外。
+	 */
 	public MyMessage(String title, String message) throws JSONException {
 	    this._object = new JSONObject();
 	    JSONObject data = new JSONObject();
